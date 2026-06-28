@@ -1,0 +1,26 @@
+# MOI / Moment of Inertia project
+#
+# Quick start:
+#   1. Create and activate a virtual environment:
+#      python3 -m venv .venv
+#      source .venv/bin/activate
+#
+#   2. Install Python dependencies:
+#      pip install -r requirements.txt
+#
+#   3. Render a scene from inside the MOI folder:
+#      manim -pqh main.py SpinnerIntuition
+#
+# Other scenes in main.py include:
+#   RotationalNewton
+#   MomentDefinition
+#   ParallelAxisTheorem
+#   PerpendicularAxisTheorem
+#   RingCentralAxis
+#   RingAllAxes
+#
+# Notes for proper rendering on Linux:
+#   - Manim also depends on system packages such as ffmpeg, cairo, and pango.
+#   - If rendering fails, install the missing OS packages first, then rerun Manim.
+manim
+numpy
