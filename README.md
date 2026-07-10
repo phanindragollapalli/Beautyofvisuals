@@ -1,36 +1,53 @@
 # Beautyofvisuals
 
-This repository contains the Python Manim code used to create visual explainer videos.
+Python Manim projects for educational explainer videos.
 
-## MOI Folder
+## Repository layout
 
-The `MOI` folder is a self-contained Manim project focused on moment of inertia. It is built around one main animation script and a few supporting files that make it easy to run and render the video locally.
+- `requirements.txt`: shared dependency base for every project folder.
+- `render.ps1`: root PowerShell entrypoint that can run any project folder.
+- `MOI/`: self-contained Moment of Inertia animation project.
+- `MOI/main.py`: the Manim scene definitions.
+- `MOI/README.md`: project-specific setup and render instructions.
+- `MOI/requirements.txt`: project-specific dependency wrapper.
+- `MOI/render.ps1`: project-local PowerShell render helper.
 
-At a high level, the folder includes:
+Generated files such as Manim media output, caches, and local virtual environments are intentionally ignored.
+Each animation project keeps its code and generated videos in the same project folder.
+To add a new project, create another sibling folder like `MOI/` with `main.py`, `requirements.txt`, `render.ps1`, and `media/`.
+The root scripts are set up so more project folders can be added without changing the top-level layout.
 
-- `main.py`: the core Manim script containing the full sequence of scenes.
-- `requirements.txt`: the Python dependencies and quick setup or render commands.
-- `prompt.md`: short project notes and direction for the video.
-- `media/`: rendered outputs and other generated assets created by Manim.
+## Quick start
 
-## What The Script Covers
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+.\render.ps1 -Project MOI -Scene SpinnerIntuition -Preview
+```
 
-`main.py` contains 7 scenes, and together they build the explanation for the video from intuition to formal results:
+## Current project
 
-- `SpinnerIntuition`: introduces the main idea using two wheels with the same mass but different radii.
-- `RotationalNewton`: connects torque and angular acceleration to show why rotational motion changes differently.
-- `MomentDefinition`: introduces the actual moment of inertia definition.
-- `ParallelAxisTheorem`: explains how shifting the axis changes the moment of inertia.
-- `PerpendicularAxisTheorem`: shows the perpendicular axis relationship for flat objects.
-- `RingCentralAxis`: looks at a ring about its central axis.
-- `RingAllAxes`: compares the ring across multiple axes for a fuller geometric view.
+`MOI` contains a full moment of inertia explainer made of these scenes:
 
-## How To Run
+1. `SpinnerIntuition`
+2. `RotationalNewton`
+3. `MomentDefinition`
+4. `ParallelAxisTheorem`
+5. `PerpendicularAxisTheorem`
+6. `RingCentralAxis`
+7. `RingAllAxes`
 
-From inside the `MOI` folder:
+For detailed setup notes, output locations, and direct Manim commands, see [MOI/README.md](MOI/README.md).
 
-1. Create and activate a virtual environment.
-2. Install the Python dependencies with `pip install -r requirements.txt`.
-3. Render a scene with a command like `manim -pqh main.py SpinnerIntuition`.
+## Structure rule
 
-The same pattern works for the other scene names listed above.
+Each video project should follow this pattern:
+
+- `ProjectName/main.py`: Manim scenes for that project
+- `ProjectName/requirements.txt`: project dependencies
+- `ProjectName/render.ps1`: project render helper
+- `ProjectName/media/`: generated Manim output for that project only
+
+That keeps source code and rendered video assets grouped together instead of mixing outputs across projects.
